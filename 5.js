@@ -4,12 +4,12 @@
 // Клас BankTransfer представляє собою систему для здійснення банківських переказів
 class BankTransfer {
   initiateTransfer(amount) {
-    const calculatedAmount = this.calculateFee(amount)
-    console.log(`Ініціюємо банківський переказ: $${calculatedAmount}`)
+    const calculatedAmount = this.calculateFee(amount);
+    console.log(`Ініціюємо банківський переказ: $${calculatedAmount}`);
   }
 
   calculateFee(amount) {
-    return amount * 1.02
+    return amount * 1.02;
   }
   // Зробіть метод initiateTransfer, який приймає amount та відповідає за ініціювання банківського переказу
   // Він приймає суму переказу як параметр
@@ -24,7 +24,7 @@ class BankTransfer {
 // Клас WalletTransfer представляє собою систему для здійснення переказів з гаманця
 class WalletTransfer {
   processTransfer(amount) {
-    console.log(`Здійснюємо переказ з гаманця: $${amount}`)
+    console.log(`Здійснюємо переказ з гаманця: $${amount}`);
   }
   // Створіть метод processTransfer, який відповідає за здійснення переказу з гаманця
   // Він приймає суму переказу як параметр
@@ -35,16 +35,16 @@ class WalletTransfer {
 // методами WalletTransfer так, ніби це BankTransfer.
 class TransferAdapter {
   constructor(transferSystem) {
-    this.transferSystem = transferSystem
+    this.transferSystem = transferSystem;
   }
 
   initiateTransfer(amount) {
-    const calculatedAmount = this.calculateFee(amount)
-    this.transferSystem.processTransfer(amount)
+    const calculatedAmount = this.calculateFee(amount);
+    this.transferSystem.processTransfer(amount);
   }
 
   calculateFee(amount) {
-    return amount * 1.2
+    return amount * 1.2;
   }
   // Робимо конструктор, що приймає об'єкт transferSystem типу WalletTransfer
   // Зберігаємо посилання на об'єкт WalletTransfer у властивості transferSystem
@@ -59,26 +59,25 @@ class TransferAdapter {
 
 class Transfer {
   constructor(amount) {
-    this.amount = amount
+    this.amount = amount;
 
     if (amount < 100) {
-      this.transferSystem = new TransferAdapter(new WalletTransfer)
+      this.transferSystem = new TransferAdapter(new WalletTransfer());
     } else {
-      this.transferSystem = new BankTransfer
+      this.transferSystem = new BankTransfer();
     }
   }
 
   makeTransfer() {
-    return this.transferSystem.initiateTransfer(this.amount)
+    return this.transferSystem.initiateTransfer(this.amount);
   }
 }
 console.log("Завдання 5 ====================================");
 // Після виконання розкоментуйте код нижче
 
 // Створимо екземпляри BankTransfer
-const purchase1 = new Transfer();
-purchase1.initiateTransfer(1000);
+const purchase1 = new Transfer(1000);
+purchase1.makeTransfer();
 
-const purchase2 = new Transfer();
-purchase2.initiateTransfer(10);
-
+const purchase2 = new Transfer(10);
+purchase2.makeTransfer();
